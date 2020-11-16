@@ -4,13 +4,12 @@
 #include "hash.h"
 
 using namespace std;
-
+//mu first line
 int main()
 {
     hash1 hashObj;
     int index;
     index = hashObj.HASH("Kerzazi");
-
 
     return 0;
 }
