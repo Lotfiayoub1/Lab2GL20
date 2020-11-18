@@ -20,12 +20,12 @@ private:
 
 public:
     hash1();
-    int HASH(string cle);
+    int HASH(string cle); //DONE
 
     // les méthodes  à developper
-    void test();
-    void ajouterItem(string nom, string tel);
-    void afficherItem();
+    void test();                              //DONE
+    void ajouterItem(string nom, string tel); //70%
+    void afficherItem();                      //50%
 
     //int  nombreItems(int index);
     //void afficherItemsDansIndex(int index); // les items qui ont le même resultat de hashage et qui sont empilés

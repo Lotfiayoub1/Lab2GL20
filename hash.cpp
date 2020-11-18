@@ -36,6 +36,32 @@ void hash1::afficherItem()
         }
     }
 }
+// void hash1::ajouterItem(string nom, string tel)
+// {
+//     int index = HASH(nom);
+//     if (HashTable[index]->nom == "vide")
+//     {
+//         HashTable[index]->nom = nom;
+//         HashTable[index]->tel = tel;
+//         HashTable[index]->next = NULL;
+//     }
+//     else
+//     {
+//         item *nv_elmnt;
+//         nv_elmnt = (item *)malloc(sizeof(item));
+//         nv_elmnt->nom = nom;
+//         nv_elmnt->tel = tel;
+//         nv_elmnt->next = NULL;
+//         item *p;
+//         p = HashTable[index];
+//         while (p->next != NULL)
+//         {
+//             p = p->next;
+//         }
+//         p->next = nv_elmnt;
+//     }
+// }
+
 void hash1::ajouterItem(string nom, string tel)
 {
     int index = HASH(nom);
@@ -43,21 +69,29 @@ void hash1::ajouterItem(string nom, string tel)
     {
         HashTable[index]->nom = nom;
         HashTable[index]->tel = tel;
-        HashTable[index]->next = NULL;
+        item *elemntVide;
+        elemntVide = (item *)malloc(sizeof(item));
+        elemntVide->nom = "vide";
+        elemntVide->tel = "vide";
+        elemntVide->next = NULL;
+        HashTable[index]->next = (item *)malloc(sizeof(item));
+        HashTable[index]->next = elemntVide;
     }
     else
     {
         item *nv_elmnt;
         nv_elmnt = (item *)malloc(sizeof(item));
-        nv_elmnt->nom = nom;
-        nv_elmnt->tel = tel;
+        nv_elmnt->nom = "vide";
+        nv_elmnt->tel = "vide";
         nv_elmnt->next = NULL;
         item *p;
         p = HashTable[index];
-        while (p->next != NULL)
+        while (p->nom != "vide")
         {
             p = p->next;
         }
+        p->nom = nom;
+        p->tel = tel;
         p->next = nv_elmnt;
     }
 }
@@ -75,7 +109,7 @@ void hash1::test()
 
     HashTable[1]->nom = "ayoub";
     HashTable[1]->tel = "0617006426";
-    HashTable[1]->next = NULL;
+
     if (HashTable[1]->nom == "vide")
     {
         cout << "hadchi machi howa" << endl;
@@ -88,26 +122,34 @@ void hash1::test()
 
 void hash1::chercherItem(string nom)
 {
-    // int index = HASH(nom);
-    // if (HashTable[index]->nom == "vide")
-    // {
-    //     cout << nom << " n'existe pas " << endl;
-    // }
-    // else
-    // {
-    //     item *p;
-    //     p = HashTable[index];
-    //     while (p->next != NULL)
-    //     {
-    //         if (p->nom == nom)
-    //         {
-    //             cout << nom << "existe dans la table" << endl;
-    //             break;
-    //         }
-    //     }
-
-    //     cout << nom << " n'existe pas dans le tableau" << endl;
-    // }
+    int index = HASH(nom);
+    if (HashTable[index]->nom == "vide")
+    {
+        cout << nom << " n'existe pas " << endl;
+    }
+    else
+    {
+        item *p;
+        p = HashTable[index];
+        bool EXIST = false;
+        while (p->next == NULL)
+        {
+            if (p->nom == nom)
+            {
+                //cout << nom << "existe dans la table" << endl;
+                EXIST = true;
+                break;
+            }
+        }
+        if (EXIST)
+        {
+            cout << nom << "existe dans la table" << endl;
+        }
+        else
+        {
+            cout << nom << " n'existe pas dans le tableau" << endl;
+        }
+    }
 }
 
 hash1::hash1()
