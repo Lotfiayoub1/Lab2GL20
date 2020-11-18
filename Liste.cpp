@@ -4,13 +4,13 @@
 #include <string>
 using namespace std;
 
-struct node
+struct item
 {
-    string nom;
-    node *next;
+    string nom = "";
+    item *next = NULL;
 };
 
-node *HashTable[10] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL}, *c;
+item *HashTable[10] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL}, *c;
 
 int HASH(string cle)
 {
@@ -30,12 +30,12 @@ void ajouterItem()
     cout << "entrer a name into hash table" << endl;
     cin >> key;
     i = HASH(key);
-    node *newnode = (node *)malloc(sizeof(node));
-    newnode->nom = key;
-    newnode->next = NULL;
+    item *newitem = (item *)malloc(sizeof(item));
+    newitem->nom = key;
+    newitem->next = NULL;
     if (HashTable[i] == NULL)
     {
-        HashTable[i] = newnode;
+        HashTable[i] = newitem;
     }
     else
     {
@@ -44,7 +44,7 @@ void ajouterItem()
         {
             c = c->next;
         }
-        c->next = newnode;
+        c->next = newitem;
     }
 }
 
@@ -52,7 +52,7 @@ void chercherItem()
 {
     int index;
     string key;
-    cout << "entrer a value to afficherItem into hash table" << endl;
+    cout << "entrer a name to search into hash table" << endl;
     cin >> key;
     index = HASH(key);
     if (HashTable[index] == NULL)
